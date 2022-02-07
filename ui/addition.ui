@@ -24,20 +24,6 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>热键：</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" alignment="Qt::AlignTop">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>文本：</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="2">
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="3">
@@ -77,15 +63,25 @@
        </item>
       </layout>
      </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>热键：</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="2">
       <widget class="QTextEdit" name="textEdit"/>
      </item>
-     <item row="0" column="2">
-      <widget class="QLineEdit" name="hotkey">
+     <item row="1" column="1" alignment="Qt::AlignTop">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>无</string>
+        <string>文本：</string>
        </property>
       </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="hotkey"/>
      </item>
     </layout>
    </widget>

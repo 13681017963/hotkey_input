@@ -13,6 +13,7 @@ from ui.home import *
 
 keyboard_pynput = Controller()
 
+# pyinstaller -i images/squirrel.ico -w main.py
 # 打包命令 需要pip install pywin32，否则换了windows环境可能无法执行
 # 生成三个文件.spec后缀的配置文件 dist文件夹放生成的exe build文件夹
 # pyinstaller --hidden-import=six -i ./data.ico -w -F main.py
@@ -150,9 +151,12 @@ class AdditionWindow(QMainWindow, Ui_AdditionWindow):
         # Qt.StrongFocus 可通过上面两种方式获得焦点
         # Qt.NoFocus 不能通过上两种方式获得焦点(默认值), setFocus仍可使其获得焦点
         self.setFocusPolicy(Qt.StrongFocus)
-        self.hotkey.setFocusPolicy(Qt.NoFocus)
+        self.hotkey.setFocusPolicy(Qt.StrongFocus)
+        self.textEdit.setFocusPolicy(Qt.StrongFocus)
         self.confirm_button.setFocusPolicy(Qt.NoFocus)
         self.cancel_button.setFocusPolicy(Qt.NoFocus)
+        self.hotkey.setReadOnly(True)
+        # self.hotkey.end(True)
 
     def confirm_addition(self):
         Initialize.addition.hide()
@@ -172,6 +176,9 @@ class AdditionWindow(QMainWindow, Ui_AdditionWindow):
         Initialize.addition.hide()
 
     def keyPressEvent(self, QKeyEvent):  # 键盘某个键被按下时调用
+        # 选中指定控件才触发按键捕获
+        if self.focusWidget().objectName() != 'hotkey':
+            return
         # modifiers()   判断修饰键
         # Qt.NoModifier   没有修饰键
         # Qt.ShiftModifier    Shift键被按下
@@ -229,6 +236,9 @@ class AdditionWindow(QMainWindow, Ui_AdditionWindow):
                 else:
                     self.hotkey.setText('ctrl+alt+shift+' + keyboard_dic[QKeyEvent.key()])
                     print('按下了ctrl+alt+shift+' + keyboard_dic[QKeyEvent.key()])
+            else:
+                self.hotkey.clear()
+                self.hotkey.setText('无')
             print(QKeyEvent.key())
         except Exception as e:
             print(QKeyEvent.key(), e)
