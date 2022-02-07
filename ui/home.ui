@@ -33,6 +33,11 @@
       <string>文本</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>备注</string>
+     </property>
+    </column>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">

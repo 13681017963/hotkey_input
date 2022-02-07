@@ -41,6 +41,8 @@ keyboard_dic = {16777216: 'esc', 16777264: 'f1', 16777265: 'f2', 16777266: 'f3',
                 }
 # caps_lock_status = {'capital': [256, 768, 1280, 1792], 'lowercase': [0, 512, 1024, 1536]}
 
+shift_dic = {'1': '!', '!': '1'}
+
 
 class HomeWindow(QMainWindow, Ui_HomeWindow):
     def __init__(self, parent=None):
@@ -123,10 +125,10 @@ class HomeWindow(QMainWindow, Ui_HomeWindow):
 
 def type_content(content, is_shift):
     if is_shift:
-        keyboard_pynput.type([Key.caps_lock])
-    keyboard_pynput.type(list(content))
-    if is_shift:
-        keyboard_pynput.type([Key.caps_lock])
+        keyboard_pynput.release(Key.shift)
+        keyboard_pynput.type(list(content))
+    else:
+        keyboard_pynput.type(list(content))
 
 
 class HotKeys(QThread):
