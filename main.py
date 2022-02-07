@@ -3,7 +3,7 @@ from keyboard import add_hotkey, wait, remove_hotkey
 from sys import argv, exit
 from pandas import DataFrame, read_csv
 from pynput.keyboard import Key, Controller
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAbstractItemView, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAbstractItemView, QTableWidgetItem, QHeaderView
 # from PyQt5.QtGui import QIcon, QPixmap, QImage, QPainter, QMovie
 # from PyQt5.Qt import QSize, QImageReader, QKeySequence
 from PyQt5.QtCore import Qt, QThread
@@ -58,6 +58,9 @@ class HomeWindow(QMainWindow, Ui_HomeWindow):
             self.tableWidget.setItem(i, 0, QTableWidgetItem(df['hotkey'].loc[i]))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(df['content'].loc[i]))
             HotKeys(self, df['hotkey'].loc[i], df['content'].loc[i]).start()
+        # 表格内容自动填充
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
     def closeEvent(self, event):
         """
